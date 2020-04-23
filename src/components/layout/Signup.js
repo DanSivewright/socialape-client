@@ -30,6 +30,7 @@ export const Signup = () => {
             .then(res => {
                 setLoading(false)
                 setErrors([])
+                localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`)
                 history.push('/')
             })
             .catch(err => {

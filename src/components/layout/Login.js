@@ -29,7 +29,7 @@ export const Login = () => {
             .then(res => {
                 setLoading(false)
                 setErrors([])
-                console.log(localStorage.getItem.FBIdToken)
+                localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`)
                 history.push('/')
             })
             .catch(err => {

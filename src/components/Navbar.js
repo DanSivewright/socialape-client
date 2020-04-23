@@ -8,7 +8,7 @@ import { HomeOutlined, FormOutlined, EditOutlined } from '@ant-design/icons'
 export const Navbar = () => {
     return (
         <div className="container">
-            <Menu mode="horizontal">
+            <Menu>
                 <Menu.Item component={Link} to="/">
                     <Link to="/"/>
                     <HomeOutlined />

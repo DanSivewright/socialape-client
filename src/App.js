@@ -9,12 +9,20 @@ import { Signup } from './components/layout/Signup'
 
 // Components
 import { Navbar } from './components/Navbar'
+import AuthRoute from './components/Util/AuthRoute'
 
-// const token = localStorage.FBIdToken;
-// if(tokenn) {
-//   const decodedToken = jwtDecode(token)
-  console.log(localStorage.getItem.FBIdToken)
-// }
+let authenticated;
+const token = localStorage.FBIdToken;
+
+if(token) {
+  const decodedToken = jwtDecode(token)
+   if(decodedToken.exp < (new Date().getTime() + 1) / 1000) {
+     window.location.href = '/login'
+     authenticated = false;
+   } else   {
+     authenticated = true
+   }
+}
 
 export const App = () => {
   return (
@@ -23,9 +31,9 @@ export const App = () => {
         <Navbar/>
         <div className="content">
           <Switch>
-            <Route exact path="/" component={Home}/>
-            <Route exact path="/login" component={Login}/>
-            <Route exact path="/signup" component={Signup}/>
+            <Route exact path="/" component={Home} auth={authenticated}/>
+            <AuthRoute exact path="/login" component={Login} auth={authenticated}/>
+            <AuthRoute exact path="/signup" component={Signup} auth={authenticated}/>
           </Switch>
         </div>
       </Router>
